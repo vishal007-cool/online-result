@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 50%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Enter Hall Ticket Number</h2>
+    <input type="text" id="hallticket" placeholder="Enter Hall Ticket Number">
+    <button onclick="generateResult()">Get Result</button>
+    <div id="result"></div>
+
+    <script>
+        function generateResult() {
+            const hallticket = document.getElementById("hallticket").value;
+            if (!hallticket) {
+                alert("Please enter a Hall Ticket Number");
+                return;
+            }
+            
+            const subjects = ["English", "BCS", "FOE", "Maths", "C Program", "FIT"];
+            let resultHTML = `<h3>Result for Hall Ticket: ${hallticket}</h3><table><tr><th>Subject</th><th>Result</th></tr>`;
+            
+            let passCount = 0;
+            subjects.forEach(subject => {
+                let status = Math.random() > 0.3 ? "Pass" : "Fail"; // 70% chance of passing
+                if (status === "Pass") passCount++;
+                resultHTML += `<tr><td>${subject}</td><td>${status}</td></tr>`;
+            });
+            
+            resultHTML += `</table><h3>Final Result: ${passCount >= subjects.length / 2 ? "Pass" : "Fail"}</h3>`;
+            //resultHTML += `<h2>Chill, it's fake!</h2>`;
+            document.getElementById("result").innerHTML = resultHTML;
+            //document.getElementById("result").innerHTML += "<h3>Chill, it's fake!</h3>";
+        }
+    </script>
+</body>
+</html>
